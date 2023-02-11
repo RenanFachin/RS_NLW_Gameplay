@@ -5,6 +5,7 @@ import { Profile } from '../../components/Profile';
 import { ButtonAdd } from '../../components/ButtonAdd';
 
 import { styles } from './styles';
+import { CategorySelect } from '../../components/CategorySelect';
 
 
 
@@ -20,11 +21,15 @@ export function Home() {
                 paddingHorizontal: 24,
                 flexDirection: 'row',
                 justifyContent: 'space-between',
-                marginTop: insets.top + 32 ,
+                marginTop: insets.top + 32,
                 marginBottom: 42
             }}>
                 <Profile />
                 <ButtonAdd />
+            </View>
+
+            <View>
+                <CategorySelect />
             </View>
 
         </View>
