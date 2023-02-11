@@ -2,6 +2,8 @@ import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Profile } from '../../components/Profile';
+import { ButtonAdd } from '../../components/ButtonAdd';
+
 import { styles } from './styles';
 
 
@@ -22,6 +24,7 @@ export function Home() {
                 marginBottom: 42
             }}>
                 <Profile />
+                <ButtonAdd />
             </View>
 
         </View>
