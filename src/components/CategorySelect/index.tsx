@@ -1,7 +1,16 @@
 import { ScrollView } from 'react-native';
 import { styles } from './styles';
 
-export function CategorySelect() {
+import { Category } from '../Category';
+
+import { categories } from '../../utils/categories';
+
+type props = {
+    categorySelected: string;
+    setCategory: (categoryId: string) => void;
+}
+
+export function CategorySelect({ categorySelected, setCategory }: props) {
     return (
         <ScrollView
             style={styles.container}
@@ -11,7 +20,16 @@ export function CategorySelect() {
         >
 
             {
-                
+                categories.map((category) => (
+                    <Category
+                        title={category.title}
+                        icon={category.icon}
+                        key={category.id}
+
+                        checked={category.id === categorySelected}
+                        onPress={() => setCategory(category.id)}
+                    />
+                ))
             }
 
         </ScrollView>

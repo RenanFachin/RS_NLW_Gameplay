@@ -7,21 +7,21 @@ export const categories = [
     {
         id: '1',
         title: 'Ranqueada',
-        icon: ''
+        icon: RankedSVG
     },
     {
         id: '2',
         title: 'Duelo 1x1',
-        icon: ''
+        icon: DuelSVG
     },
     {
         id: '3',
         title: 'Diversão',
-        icon: ''
+        icon: FunSVG
     },
     {
         id: '4',
         title: 'Treino',
-        icon: ''
+        icon: TrainingSVG
     }
 ]
