@@ -1,5 +1,6 @@
 import { View, Image, Text } from 'react-native';
 import { styles } from './styles';
+import { useNavigation } from '@react-navigation/native'
 
 import { ButtonIcon } from '../../components/ButtonIcon';
 
@@ -7,9 +8,15 @@ import IllustrationImg from '../../assets/illustration.png'
 
 export function SignIn() {
 
+    const navigation = useNavigation()
+
+    function handleSignIn() {
+        navigation.navigate('Home')
+    }
+
     return (
         <View style={styles.container}>
-            <Image source={IllustrationImg} style={styles.image} resizeMode="stretch"/>
+            <Image source={IllustrationImg} style={styles.image} resizeMode="stretch" />
 
             <View style={styles.content}>
                 <Text style={styles.title}>
@@ -22,7 +29,10 @@ export function SignIn() {
                 </Text>
 
 
-                <ButtonIcon title='Entrar com o discord'/>
+                <ButtonIcon
+                    title='Entrar com o discord'
+                    onPress={handleSignIn}
+                />
             </View>
 
         </View>
