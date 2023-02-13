@@ -73,7 +73,7 @@ export function Home() {
                     marginBottom: 42
                 }}>
                     <Profile />
-                    <ButtonAdd onPress={handleAppointmenteCreate}/>
+                    <ButtonAdd onPress={handleAppointmenteCreate} />
                 </View>
 
 
@@ -83,24 +83,29 @@ export function Home() {
                 />
 
 
-                <View style={styles.content}>
-                    <ListHeader title='Partidas agendadas' subtitle='Total: 6' />
 
-                    <FlatList
-                        data={appointments}
-                        keyExtractor={item => item.id}
-                        renderItem={({ item }) => (
-                            <Appointment
-                                data={item}
-                                onPress={handleAppointmenteDetails}
-                            />
-                        )}
-                        style={styles.matches}
-                        showsVerticalScrollIndicator={false}
-                        // Passando um componente como um divisor de lista
-                        ItemSeparatorComponent={() => <ListDivider />}
-                    />
-                </View>
+                <ListHeader
+                    title='Partidas agendadas'
+                    subtitle='Total: 6'
+                />
+
+
+                <FlatList
+                    data={appointments}
+                    keyExtractor={item => item.id}
+                    renderItem={({ item }) => (
+                        <Appointment
+                            data={item}
+                            onPress={handleAppointmenteDetails}
+                        />
+                    )}
+                    style={styles.matches}
+                    showsVerticalScrollIndicator={false}
+                    // Passando um componente como um divisor de lista
+                    ItemSeparatorComponent={() => <ListDivider />}
+                    // deixando um "respiro" ao final da lista
+                    contentContainerStyle={{paddingBottom: 68}}
+                />
             </View>
         </Background>
     );

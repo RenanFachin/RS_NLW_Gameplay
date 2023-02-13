@@ -16,12 +16,12 @@ export const styles = StyleSheet.create({
     fontFamily: theme.fonts.title700,
     color: theme.colors.heading,
     fontSize: 18,
-    marginBottom: 11
+    marginBottom: 4
   },
   userType: {
     fontFamily: theme.fonts.title700,
     color: theme.colors.heading,
     fontSize: 13,
-    marginBottom: 24
+    marginBottom: 12
   }
 });
