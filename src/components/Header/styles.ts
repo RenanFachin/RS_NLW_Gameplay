@@ -4,11 +4,11 @@ import { theme } from '../../global/styles/theme';
 export const styles = StyleSheet.create({
     container: {
         width: '100%',
-        height: 104,
+        height: 130,
         paddingHorizontal: 24,
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     title: {
         flex: 1,
