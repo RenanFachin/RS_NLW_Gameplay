@@ -20,7 +20,7 @@ export function SignIn() {
 
             <View style={styles.content}>
                 <Text style={styles.title}>
-                    Conecte-se {`\n`}suas jogatinas {`\n`}facilmente
+                    Conecte {`\n`}suas jogatinas {`\n`}facilmente
                 </Text>
 
                 <Text style={styles.subtitle}>
