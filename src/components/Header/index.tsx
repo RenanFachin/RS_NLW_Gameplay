@@ -23,7 +23,7 @@ export function Header({ title, action }: HeaderProps) {
 
     return (
         <LinearGradient
-            style={[styles.container, { paddingTop: insets.top + 32 }]}
+            style={[styles.container]}
             colors={[secondary100, secondary40]}
         >
             <TouchableOpacity onPress={handleGoBack}>

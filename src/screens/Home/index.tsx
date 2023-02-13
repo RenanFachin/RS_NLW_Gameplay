@@ -56,6 +56,10 @@ export function Home() {
         navigate('AppointmentDetails')
     }
 
+    function handleAppointmenteCreate() {
+        navigate('AppointmentCreate')
+    }
+
     return (
         <Background>
             <View style={styles.container}>
@@ -69,7 +73,7 @@ export function Home() {
                     marginBottom: 42
                 }}>
                     <Profile />
-                    <ButtonAdd />
+                    <ButtonAdd onPress={handleAppointmenteCreate}/>
                 </View>
 
 
