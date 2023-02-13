@@ -5,6 +5,7 @@ export declare global {
             SignIn: undefined;
             AppointmentDetails: undefined;
             AppointmentCreate: undefined;
+            Guilds: undefined;
         }
     }
 }
