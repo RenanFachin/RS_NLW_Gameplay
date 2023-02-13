@@ -11,10 +11,12 @@ import { Appointment } from '../../components/Appointment';
 import { Background } from '../../components/Background';
 
 import { styles } from './styles';
+import { useNavigation } from '@react-navigation/native';
 
 
 
 export function Home() {
+    const { navigate } = useNavigation()
     const insets = useSafeAreaInsets()
     const [category, setCategory] = useState('')
 
@@ -50,6 +52,10 @@ export function Home() {
         categoryId === category ? setCategory('') : setCategory(categoryId)
     }
 
+    function handleAppointmenteDetails() {
+        navigate('AppointmentDetails')
+    }
+
     return (
         <Background>
             <View style={styles.container}>
@@ -80,7 +86,10 @@ export function Home() {
                         data={appointments}
                         keyExtractor={item => item.id}
                         renderItem={({ item }) => (
-                            <Appointment data={item} />
+                            <Appointment
+                                data={item}
+                                onPress={handleAppointmenteDetails}
+                            />
                         )}
                         style={styles.matches}
                         showsVerticalScrollIndicator={false}
