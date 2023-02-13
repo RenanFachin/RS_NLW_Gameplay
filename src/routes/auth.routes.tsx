@@ -1,4 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { theme } from '../global/styles/theme'
 
 import { Home } from '../screens/Home'
 import { SignIn } from '../screens/SignIn'
@@ -11,7 +12,7 @@ export function AuthRoutes() {
             screenOptions={{
                 headerShown: false,
                 contentStyle: {
-                    backgroundColor: 'transparent'
+                    backgroundColor: theme.colors.secondary100
                 }
             }}
         >
