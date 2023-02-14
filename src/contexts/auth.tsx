@@ -106,6 +106,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
          setUser(userLogged)
       }
    }
+
+   
    useEffect(() => {
       loadUserStorageData()
    },[])
