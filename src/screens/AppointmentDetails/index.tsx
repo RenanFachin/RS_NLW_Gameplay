@@ -17,6 +17,7 @@ import BannerImg from '../../assets/banner.png'
 import { useRoute } from '@react-navigation/native';
 import { api } from '../../services/apiDiscord';
 import { useState, useEffect } from 'react';
+import * as Linking from 'expo-linking'
 
 type ParamsProps = {
     guildSelected: AppointmentProps;
@@ -56,11 +57,17 @@ export function AppointmentDetails() {
     // Compartilhamento do link
     function handleShareInvitation() {
         const message = Platform.OS === 'ios' ? `Junte-se à ${guildSelected.guild.name}` : widget.instant_invite
-        
+
         Share.share({
             message,
             url: widget.instant_invite
         })
+    }
+
+
+    // Acessando um servidor
+    function handleOpenGuild() {
+        Linking.openURL(widget.instant_invite)
     }
 
 
@@ -75,7 +82,7 @@ export function AppointmentDetails() {
                 <Header
                     title='Detalhes'
                     action={
-                        guildSelected.guild.owner && 
+                        guildSelected.guild.owner &&
                         <TouchableOpacity onPress={handleShareInvitation}>
                             <Fontisto
                                 name="share"
@@ -125,7 +132,10 @@ export function AppointmentDetails() {
 
 
                 <View style={[styles.footer, {}]}>
-                    <ButtonIcon title='Entrar no servidor do Discord' />
+                    <ButtonIcon
+                        title='Entrar no servidor do Discord'
+                        onPress={handleOpenGuild}
+                    />
                 </View>
             </SafeAreaView>
         </Background>
