@@ -1,4 +1,4 @@
-import { View, TouchableOpacity, ImageBackground, Text, FlatList, Alert } from 'react-native';
+import { View, TouchableOpacity, ImageBackground, Text, FlatList, Alert, Share, Platform } from 'react-native';
 
 import { Background } from '../../components/Background';
 import { ListHeader } from '../../components/ListHeader';
@@ -53,6 +53,17 @@ export function AppointmentDetails() {
     }
 
 
+    // Compartilhamento do link
+    function handleShareInvitation() {
+        const message = Platform.OS === 'ios' ? `Junte-se à ${guildSelected.guild.name}` : widget.instant_invite
+        
+        Share.share({
+            message,
+            url: widget.instant_invite
+        })
+    }
+
+
     useEffect(() => {
         fetchGuildWidget()
     }, [])
@@ -64,7 +75,8 @@ export function AppointmentDetails() {
                 <Header
                     title='Detalhes'
                     action={
-                        <TouchableOpacity>
+                        guildSelected.guild.owner && 
+                        <TouchableOpacity onPress={handleShareInvitation}>
                             <Fontisto
                                 name="share"
                                 size={24}
