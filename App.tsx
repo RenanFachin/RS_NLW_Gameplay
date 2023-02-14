@@ -9,7 +9,7 @@ import { useFonts } from 'expo-font';
 import { Inter_400Regular, Inter_500Medium } from '@expo-google-fonts/inter'
 import { Rajdhani_500Medium, Rajdhani_700Bold } from '@expo-google-fonts/rajdhani'
 
-
+import { AuthProvider } from './src/contexts/auth';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 
@@ -36,8 +36,9 @@ export default function App() {
           backgroundColor="transparent"
           translucent
         />
-
-        <Routes />
+        <AuthProvider>
+          <Routes />
+        </AuthProvider>
       </SafeAreaProvider>
     </Background>
   );

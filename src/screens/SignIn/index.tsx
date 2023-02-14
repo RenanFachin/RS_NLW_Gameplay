@@ -1,6 +1,8 @@
-import { View, Image, Text } from 'react-native';
+import { View, Image, Text, Alert } from 'react-native';
 import { styles } from './styles';
-import { useNavigation } from '@react-navigation/native';
+
+import { useAuth } from '../../hooks/useAuth';
+
 
 import { ButtonIcon } from '../../components/ButtonIcon';
 import { Background } from '../../components/Background';
@@ -8,11 +10,15 @@ import { Background } from '../../components/Background';
 import IllustrationImg from '../../assets/illustration.png'
 
 export function SignIn() {
+    // Contextos
+    const { user, SignIn } = useAuth()
 
-    const { navigate } = useNavigation()
-
-    function handleSignIn() {
-        navigate('Home')
+    async function handleSignIn() {
+        try{ 
+            await SignIn()
+        } catch (error){
+            
+        }
     }
 
     return (
