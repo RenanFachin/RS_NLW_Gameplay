@@ -1,7 +1,13 @@
 import { createContext, ReactNode, useState } from 'react'
 import * as AuthSession from 'expo-auth-session'
-import { SCOPE, CDN_IMAGE, CLIENT_ID, REDIRECT_URI, RESPONSE_TYPE } from '../configs'
+
 import { api } from '../services/apiDiscord';
+
+const { SCOPE } = process.env
+const { CDN_IMAGE } = process.env
+const { CLIENT_ID } = process.env
+const { REDIRECT_URI } = process.env
+const { RESPONSE_TYPE } = process.env
 
 type User = {
    id: string;
@@ -26,7 +32,8 @@ type AuthProviderProps = {
 
 type AuthorizationResponse = AuthSession.AuthSessionResult & {
    params: {
-      access_token: string;
+      access_token?: string; // Opcional pq o usuário pode cancelar a autenticação
+      error?: string;
    }
 }
 
@@ -48,7 +55,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
          const { type, params } = await AuthSession.startAsync({ authUrl }) as AuthorizationResponse
 
          // Verificação da autenticação
-         if (type === 'success') {
+         if (type === 'success' && !params.error) {
             api.defaults.headers.authorization = `Bearer ${params.access_token}`
 
             const userInfo = await api.get('/users/@me')
@@ -66,14 +73,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
                token: params.access_token
             })
 
-            setLoading(false)
-         } else {
-            setLoading(false)
          }
 
 
       } catch {
          throw new Error('Não foi possível a autenticação.')
+      } finally {
+         setLoading(false)
       }
    }
 
