@@ -1,8 +1,8 @@
-import { View, Image, Text, Alert } from 'react-native';
+import { View, Image, Text, ActivityIndicator } from 'react-native';
 import { styles } from './styles';
+import { theme } from '../../global/styles/theme';
 
 import { useAuth } from '../../hooks/useAuth';
-
 
 import { ButtonIcon } from '../../components/ButtonIcon';
 import { Background } from '../../components/Background';
@@ -11,13 +11,13 @@ import IllustrationImg from '../../assets/illustration.png'
 
 export function SignIn() {
     // Contextos
-    const { user, SignIn } = useAuth()
+    const { loading, SignIn } = useAuth()
 
     async function handleSignIn() {
-        try{ 
+        try {
             await SignIn()
-        } catch (error){
-            
+        } catch (error) {
+
         }
     }
 
@@ -37,10 +37,15 @@ export function SignIn() {
                     </Text>
 
 
-                    <ButtonIcon
-                        title='Entrar com o discord'
-                        onPress={handleSignIn}
-                    />
+                    {
+                        loading ?
+                            <ActivityIndicator color={theme.colors.button.primary} />
+                            :
+                            <ButtonIcon
+                                title='Entrar com o discord'
+                                onPress={handleSignIn}
+                            />
+                    }
                 </View>
             </View>
         </Background>

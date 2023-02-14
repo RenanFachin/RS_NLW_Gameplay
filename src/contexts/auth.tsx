@@ -14,6 +14,7 @@ type User = {
 
 type AuthContextData = {
    user: User;
+   loading: boolean;
    SignIn: () => Promise<void>;
 }
 
@@ -21,6 +22,12 @@ export const AuthContext = createContext({} as AuthContextData)
 
 type AuthProviderProps = {
    children: ReactNode;
+}
+
+type AuthorizationResponse = AuthSession.AuthSessionResult & {
+   params: {
+      access_token: string;
+   }
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
@@ -38,7 +45,32 @@ export function AuthProvider({ children }: AuthProviderProps) {
          authUrl é para onde o usuário tem que ir ao iniciar a autenticação
          */
 
-         AuthSession.startAsync({ authUrl })
+         const { type, params } = await AuthSession.startAsync({ authUrl }) as AuthorizationResponse
+
+         // Verificação da autenticação
+         if (type === 'success') {
+            api.defaults.headers.authorization = `Bearer ${params.access_token}`
+
+            const userInfo = await api.get('/users/@me')
+
+            // Pegando apenas o primeiro nome do usuário
+            const firstName = userInfo.data.username.split(' ')[0]
+
+            // reatribuindo a imagem de avatar do usuario de acordo com o cdn
+            userInfo.data.avatar = `${CDN_IMAGE}/avatars/${userInfo.data.id}/${userInfo.data.avatar}.png`
+
+            // Como foi modificado os valores de retorno da api, temos que desestrutura e adicionar as novas informações
+            setUser({
+               ...userInfo.data,
+               firstName,
+               token: params.access_token
+            })
+
+            setLoading(false)
+         } else {
+            setLoading(false)
+         }
+
 
       } catch {
          throw new Error('Não foi possível a autenticação.')
@@ -47,7 +79,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
 
    return (
-      <AuthContext.Provider value={{ user, SignIn }}>
+      <AuthContext.Provider value={{ user, loading, SignIn }}>
          {children}
       </AuthContext.Provider>
    )
