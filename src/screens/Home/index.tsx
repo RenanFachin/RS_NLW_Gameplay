@@ -45,7 +45,7 @@ export function Home() {
     // Recarregando a listagem até mesmo quando o agendamento for realizado
     useFocusEffect(useCallback(() => {
         loadAppointments()
-    },[category]))
+    }, [category]))
 
 
     // Esta função será passada como parâmetro pelo componente CategorySelect. Será necessário tipar ela lá no componente
@@ -53,8 +53,8 @@ export function Home() {
         categoryId === category ? setCategory('') : setCategory(categoryId)
     }
 
-    function handleAppointmenteDetails() {
-        navigate('AppointmentDetails')
+    function handleAppointmenteDetails(guildSelected: AppointmentProps) {
+        navigate('AppointmentDetails', { guildSelected: guildSelected })
     }
 
     function handleAppointmenteCreate() {
@@ -99,7 +99,7 @@ export function Home() {
                                 renderItem={({ item }) => (
                                     <Appointment
                                         data={item}
-                                        onPress={handleAppointmenteDetails}
+                                        onPress={() => handleAppointmenteDetails(item)}
                                     />
                                 )}
                                 style={styles.matches}
